@@ -1,6 +1,114 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/cnn.h"
+#include "include/cnn.h" // Include the header file with CNN function declarations
+
+#define NUM_EPOCHS 10
+#define NUM_TRAIN_IMAGES 60000
+#define NUM_TEST_IMAGES 10000
+#define IMAGE_SIZE 28
+#define NUM_CLASSES 10
+#define LEARNING_RATE 0.01
+
+// Prototypes for dataset handling
+void load_dataset(float ****train_images, int **train_labels, float ****test_images, int **test_labels);
+void free_dataset(float ***train_images, int *train_labels, float ***test_images, int *test_labels);
+
+int main() {
+    // Load dataset
+    float ***train_images, ***test_images;
+    int *train_labels, *test_labels;
+    load_dataset(&train_images, &train_labels, &test_images, &test_labels);
+
+    // Initialize CNN
+    // CNN cnn;
+    // cnn_init(&cnn);
+
+    // // Train the CNN
+    // for (int epoch = 0; epoch < NUM_EPOCHS; epoch++) {
+    //     printf("Epoch %d/%d\n", epoch + 1, NUM_EPOCHS);
+    //     for (int i = 0; i < NUM_TRAIN_IMAGES; i++) {
+    //         cnn_forward(&cnn, train_images[i]);
+    //         cnn_backward(&cnn, train_labels[i]);
+    //         cnn_update(&cnn, LEARNING_RATE);
+    //     }
+    // }
+
+    // // Test the CNN
+    // float accuracy = cnn_test(&cnn, test_images, test_labels);
+    // printf("Test Accuracy: %.2f%%\n", accuracy * 100);
+
+    // // Clean up
+    // cnn_free(&cnn);
+    // free_dataset(train_images, train_labels, test_images, test_labels);
+
+    return 0;
+}
+void load_dataset(float ****train_images, int **train_labels, float ****test_images, int **test_labels) {
+    // Allocate memory for the dataset
+    *train_images = (float ***)malloc(NUM_TRAIN_IMAGES * sizeof(float **));
+    *train_labels = (int *)malloc(NUM_TRAIN_IMAGES * sizeof(int));
+    *test_images = (float ***)malloc(NUM_TEST_IMAGES * sizeof(float **));
+    *test_labels = (int *)malloc(NUM_TEST_IMAGES * sizeof(int));
+
+    // Initialize random dummy data (replace with actual dataset loading)
+    for (int i = 0; i < NUM_TRAIN_IMAGES; i++) {
+        (*train_images)[i] = (float **)malloc(IMAGE_SIZE * sizeof(float *));
+        for (int row = 0; row < IMAGE_SIZE; row++) {
+            (*train_images)[i][row] = (float *)malloc(IMAGE_SIZE * sizeof(float));
+            for (int col = 0; col < IMAGE_SIZE; col++) {
+                (*train_images)[i][row][col] = rand() % 256 / 255.0; // Normalize to [0, 1]
+            }
+        }
+        (*train_labels)[i] = rand() % NUM_CLASSES;
+    }
+
+    for (int i = 0; i < NUM_TEST_IMAGES; i++) {
+        (*test_images)[i] = (float **)malloc(IMAGE_SIZE * sizeof(float *));
+        for (int row = 0; row < IMAGE_SIZE; row++) {
+            (*test_images)[i][row] = (float *)malloc(IMAGE_SIZE * sizeof(float));
+            for (int col = 0; col < IMAGE_SIZE; col++) {
+                (*test_images)[i][row][col] = rand() % 256 / 255.0; // Normalize to [0, 1]
+            }
+        }
+        (*test_labels)[i] = rand() % NUM_CLASSES;
+    }
+}
+
+void free_dataset(float ***train_images, int *train_labels, float ***test_images, int *test_labels) {
+    // Free training data
+    for (int i = 0; i < NUM_TRAIN_IMAGES; i++) {
+        for (int row = 0; row < IMAGE_SIZE; row++) {
+            free(train_images[i][row]);
+        }
+        free(train_images[i]);
+    }
+    free(train_images);
+    free(train_labels);
+
+    // Free testing data
+    for (int i = 0; i < NUM_TEST_IMAGES; i++) {
+        for (int row = 0; row < IMAGE_SIZE; row++) {
+            free(test_images[i][row]);
+        }
+        free(test_images[i]);
+    }
+    free(test_images);
+    free(test_labels);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 int main() {
@@ -33,8 +141,8 @@ int main() {
     return 0;
 }
 */
-
 /*
+// testing convolutional layer function
 int main() {
     int in_channels = 1, out_channels = 1, kernel_size = 3, stride = 1, padding = 1;
     int in_height = 5, in_width = 5;
@@ -88,7 +196,10 @@ int main() {
 }
 */
 
+// testing pooling layer Input tensor  max-pooled tensor
+/*
 int main() {
+
     int channels = 1, in_height = 4, in_width = 4;
     int pool_size = 2, stride = 2;
 
@@ -157,3 +268,4 @@ int main() {
     free(output);
 
 }
+*/

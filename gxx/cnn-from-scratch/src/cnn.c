@@ -84,3 +84,43 @@ void conv2d(float ***input,        // Input tensor [in_channels][in_height][in_w
         free(padded_input);
     }
 }
+
+/*
+#include "cnn.h"
+#include <stdio.h>
+
+void cnn_init(CNN *cnn) {
+    // Initialize CNN structure, allocate memory for layers, weights, etc.
+}
+
+void cnn_forward(CNN *cnn, float **input) {
+    // Implement the forward pass through the CNN
+}
+
+void cnn_backward(CNN *cnn, int label) {
+    // Implement the backward pass (gradient computation)
+}
+
+void cnn_update(CNN *cnn, float learning_rate) {
+    // Update weights and biases based on gradients
+}
+
+float cnn_test(CNN *cnn, float ***test_images, int *test_labels) {
+    int correct = 0;
+    for (int i = 0; i < NUM_TEST_IMAGES; i++) {
+        cnn_forward(cnn, test_images[i]);
+        // Compare predicted label with true label
+        // Assuming `cnn_predict` returns the predicted label
+        int predicted_label = rand() % NUM_CLASSES; // Replace with actual prediction logic
+        if (predicted_label == test_labels[i]) {
+            correct++;
+        }
+    }
+    return (float)correct / NUM_TEST_IMAGES;
+}
+
+void cnn_free(CNN *cnn) {
+    // Free allocated memory for CNN
+}
+
+ */

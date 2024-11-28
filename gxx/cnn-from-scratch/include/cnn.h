@@ -102,3 +102,36 @@ float ***allocate_3d_tensor(int channels, int height, int width);
 void free_3d_tensor(float ***tensor, int channels, int height);
 
 #endif // CNN_H
+
+/*
+#ifndef CNN_H
+#define CNN_H
+
+#include <stdlib.h>
+
+// Define the CNN structure
+typedef struct {
+    // Add fields for layers, weights, biases, etc.
+} CNN;
+
+// Initialize the CNN
+void cnn_init(CNN *cnn);
+
+// Forward pass
+void cnn_forward(CNN *cnn, float **input);
+
+// Backward pass
+void cnn_backward(CNN *cnn, int label);
+
+// Update weights
+void cnn_update(CNN *cnn, float learning_rate);
+
+// Test the CNN
+float cnn_test(CNN *cnn, float ***test_images, int *test_labels);
+
+// Free CNN resources
+void cnn_free(CNN *cnn);
+
+#endif // CNN_H
+
+*/ 
